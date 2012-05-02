@@ -122,21 +122,19 @@ static int siplua_exec(struct sip_msg* _msg, const char *fnc, const char *mystr)
 int siplua_exec1(struct sip_msg* _msg, char *fnc, char *str)
 {
 /*   siplua_log(L_DBG, "exec1(,,%s)", str); */
-  return siplua_exec(_msg, fnc, NULL);
-  return 1;
+	int ret;
+	ret = siplua_exec(_msg, fnc, NULL);
+	return (ret>=0)?1:-1;
 }
 
 int siplua_exec2(struct sip_msg* _msg, char *fnc, char *str)
 {
-  int n;
+	int ret;
 
 /*   siplua_log(L_DBG, "exec2(,,%s)", str); */
-  n =  siplua_exec(_msg, fnc, str);
+	ret =  siplua_exec(_msg, fnc, str);
 /*   siplua_log(L_DBG, "exec2 RETURN %d", n); */
-  if (n)
-    return n;
-  else
-    return -1;
+	return (ret>=0)?1:-1;
 }
 
 int siplua_meminfo(struct sip_msg *msg)
